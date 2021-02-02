@@ -73,7 +73,7 @@ Danh sách này sẽ được dùng để sửa lỗi cho phần OCR
 ### TRAINING
 Hệ thống của team mình có 5 bước chính giống như hình vẽ dưới đây:
 
-![AICR](http://107.120.70.222:6969/aicr/mc_ocr/-/blob/release/pipeline_task_2.JPG "AICR")
+![AICR](https://github.com/ndcuong91/MC_OCR/blob/master/pipeline_task_2.JPG)
 
 Trước hết, các bạn hãy sửa biến sau trong file *config.py*
 ```
