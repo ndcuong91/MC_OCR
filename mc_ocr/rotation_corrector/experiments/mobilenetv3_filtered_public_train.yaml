@@ -1,0 +1,40 @@
+GPUS: (1)
+OUTPUT_DIR: 'output'
+LOG_DIR: 'log'
+WORKERS: 4
+
+
+DATASET:
+  DATASET: 'rotation_corrector'
+  ROOT: ''
+  TEST_LIST: '/data20.04/data/MC_OCR/temp_output/line_cropped/val.txt'
+  TRAIN_LIST: '/data20.04/data/MC_OCR/temp_output/line_cropped/train.txt'
+  NUM_CLASSES: 2
+MODEL:
+  NAME: mobilenetv3
+  PRETRAINED: ''
+  HEAD: ''
+  BACKBONE: ''
+#LOSS:
+
+TRAIN:
+  IMAGE_SIZE:
+    - 64
+    - 192
+  BATCH_SIZE: 256
+  SHUFFLE: true
+  BEGIN_EPOCH: 0
+  END_EPOCH: 1000
+  RESUME: true
+  OPTIMIZER: adam
+  LR: 0.001
+  DROPOUT: 0.2
+  PRINT_FREQ: 100
+  RANDOM_CROP: true
+  RESIZE: false
+
+TEST:
+  IMAGE_SIZE:
+    - 64
+    - 192
+  BATCH_SIZE: 256

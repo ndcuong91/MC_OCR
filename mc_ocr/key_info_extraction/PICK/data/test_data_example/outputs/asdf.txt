@@ -1,0 +1,5 @@
+company	BOOK TA .K(TAMAN DAYA) SDN BND
+address	NO.53 55,57 & 59, JALAN SAGU 18,
+address	81100 JOHOR BAHRU,JOHOR.
+date	25/12/2018
+total	9.00

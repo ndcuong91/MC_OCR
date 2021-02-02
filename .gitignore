@@ -1,0 +1,9 @@
+*.pyc
+submit/result/
+mc_ocr.egg-info/
+text_detector/PaddleOCR/inference/
+.idea/
+mc_ocr/data/mc_ocr_train_filtered/
+mc_ocr/rotation_corrector/output/rotation_corrector/mobilenetv3/train_20210129_1659/log_train.txt
+mc_ocr/text_detector/PaddleOCR/inference/ch_ppocr_server_v2.0_det_infer
+mc_ocr/text_detector/PaddleOCR/paddleocr.egg-info
