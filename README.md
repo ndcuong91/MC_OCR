@@ -88,29 +88,30 @@ giải nén và chỉnh sửa đường dẫn đến pre-trained trong file *con
 det_model_dir = [your extracted folder]
 ```
 #### 2. rotation corrector
-Bước này sẽ làm nhiệm vụ xoay lại hóa đơn cho thẳng. Bên mình có tạo dữ liệu và training từ đầu cho bước này. Feature extractor được sử dụng là Mobilenetv3
+Bước này sẽ làm nhiệm vụ xoay lại hóa đơn cho thẳng. Bên mình có tạo dữ liệu và training từ đầu cho bước này. 
+Feature extractor được sử dụng là Mobilenetv3.
 
-**text detector**
+Đầu tiên các bạn hãy chạy phần **text detector**
 ```
 cd text_detector/PaddleOCR
 python3 tools/infer/predict_det.py
-
 ```
 
-1. lọc các ảnh bị ngược hoặc xoay ngang trong tập train:
-    + sử dụng confidence của text classify để lọc, với threshold là 0.7
-    ```
-    python3 process_mc_ocr_data.py
-    ```
-2. tạo synthetic data và augmentation real data từ dữ liệu ở trên:
-    ```
-    python3 data_process.py
-    ```
-3. training:
-    sửa line 10, 11 file *rotation_corrector/experiments/mobilenetv3_filtered_public_train.yaml* theo đường dẫn từ bước 2. (base_output_dir)
-    ```
-    python3 train_config.py --cfg experiments/mobilenetv3_filtered_public_train.yaml
-    ```
+Sau đó lọc các ảnh bị ngược hoặc xoay ngang trong tập train (sử dụng confidence của text classify để lọc, với threshold là 0.7)
+```
+python3 process_mc_ocr_data.py
+```
+    
+Tạo synthetic data và augmentation real data từ dữ liệu ở trên:
+```
+python3 data_process.py
+``` 
+    
+Cuối cùng, sửa line 10, 11 file *rotation_corrector/experiments/mobilenetv3_filtered_public_train.yaml* 
+theo đường dẫn từ bước 2. (base_output_dir) để training
+```
+python3 train_config.py --cfg experiments/mobilenetv3_filtered_public_train.yaml
+```
     
 Pre-trained team mình sử dụng đã để sẵn trong *rotation_corrector/weights*
 
