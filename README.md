@@ -225,9 +225,15 @@ cd submit
 python3 submit.py
 
 ```
-Kết quả cuối cùng là file *submit/private_test/result.csv*
+Kết quả cuối cùng là file *submit/mc_ocr_private_test/result.csv*
+File submit cuối cùng của team mình là *submit/mc_ocr_privater_test/results_2301_3_merged.zip*
 
 ## TỔNG KẾT 
+#### Kết quả trên tập private test
+| **Task** |  **Score** |  **Top** |
+| ------- | --------- | -------- |
+| 1. Quality evaluation  | RMSE: 0.12   | 3     |
+| 2. Key information extraction  | CER: 0.23   | 2     |
 #### Open source đã sử dụng:
 - PaddleOCR: https://github.com/PaddlePaddle/PaddleOCR
 - PICK-Pytorch: https://github.com/wenwenyu/PICK-pytorch
