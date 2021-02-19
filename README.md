@@ -226,6 +226,7 @@ python3 submit.py
 
 ```
 Kết quả cuối cùng là file *submit/mc_ocr_private_test/result.csv*
+
 File submit cuối cùng của team mình là *submit/mc_ocr_privater_test/results_2301_3_merged.zip*
 
 ## TỔNG KẾT 
