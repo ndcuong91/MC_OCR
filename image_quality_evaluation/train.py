@@ -8,7 +8,7 @@ from PIL import Image
 import torch
 import torch.nn as nn
 from torch import optim
-from model_cnx_classify import cnx_classify
+from image_quality_evaluation.model_cnx_classify import cnx_classify
 import argparse
 
 parser = argparse.ArgumentParser()

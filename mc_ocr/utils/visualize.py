@@ -87,7 +87,7 @@ def viz_icdar_multi(img_dir, anno_dir, save_viz_dir, extract_kie_type=False, ign
         viz_icdar(img_path, anno_path, save_img_path, extract_kie_type, ignor_type)
 
 
-def viz_same_img_in_different_dirs(first_dir, second_dir, list_path=None):
+def viz_same_img_in_different_dirs(first_dir, second_dir, list_path=None, resize_ratio=1.0):
     list_files = get_list_file_in_folder(first_dir)
     list_err_images = None
     if list_path is not None:
@@ -101,12 +101,14 @@ def viz_same_img_in_different_dirs(first_dir, second_dir, list_path=None):
         #     continue
         first_img_path = os.path.join(first_dir, file)
         first_img = cv2.imread(first_img_path)
-        first_img_res = cv2.resize(first_img, (int(first_img.shape[1] / 2), int(first_img.shape[0] / 2)))
+        first_img_res = cv2.resize(first_img,
+                                   (int(resize_ratio * first_img.shape[1]), int(resize_ratio * first_img.shape[0])))
         cv2.imshow('first_img', first_img_res)
 
-        second_img_path = os.path.join(second_dir, file)
+        second_img_path = os.path.join(second_dir, file.replace('.jpg', '') + '_ model_epoch_639_minibatch_243000_ 0.1.jpg')
         second_img = cv2.imread(second_img_path)
-        second_img_res = cv2.resize(second_img, (int(second_img.shape[1] / 2), int(second_img.shape[0] / 2)))
+        second_img_res = cv2.resize(second_img,
+                                    (int(resize_ratio * second_img.shape[1]), int(resize_ratio * second_img.shape[0])))
         cv2.imshow('second_img', second_img_res)
         cv2.waitKey(0)
 
@@ -220,20 +222,21 @@ if __name__ == '__main__':
     #           anno_path=anno_path,
     #           save_viz_path=save_vix_path)
 
-    # viz_icdar_multi(
-    #     '/data20.04/data/MC_OCR/test_output/rotation_corrector/mc_ocr_private_test/imgs',
-    #     '/data20.04/data/MC_OCR/test_output/rotation_corrector/mc_ocr_private_test/txt',
-    #     '/data20.04/data/MC_OCR/test_output/rotation_corrector/mc_ocr_private_test/viz_imgs',
-    #     ignor_type=[1],
-    #     extract_kie_type=True)
+    viz_icdar_multi(
+        '/data20.04/data/data_Korea/WER_20210122/jpg',
+        '/home/cuongnd/PycharmProjects/aicr/aicr.core/aicr_core/res',
+        '/home/cuongnd/PycharmProjects/aicr/aicr.core/aicr_core/viz_imgs',
+        ignor_type=[],
+        extract_kie_type=False)
 
-    src_dir='/data20.04/data/MC_OCR/test_output/rotation_corrector/mc_ocr_private_test/viz_imgs'
-    compare_dir='/data20.04/data/MC_OCR/output_results/rotation_corrector/mc_ocr_private_test/viz_imgs'
-    list_path = '/home/cuongnd/PycharmProjects/mc_ocr/mc_ocr/submit/mc_ocr_private_test/check_coopmart.txt'
-
-    viz_same_img_in_different_dirs(first_dir=src_dir,
-                                   # list_path = list_path,
-                                    second_dir=compare_dir)
+    # src_dir = '/home/cuongnd/PycharmProjects/aicr/viText/viText/viData/viReceipts/viz_imgs'
+    # compare_dir = '/home/cuongnd/PycharmProjects/aicr/aicr.core/aicr_core/outputs/predict_end2end/viReceipts_2021-02-04_10-50'
+    # list_path = '/home/cuongnd/PycharmProjects/mc_ocr/mc_ocr/submit/mc_ocr_private_test/check_coopmart.txt'
+    #
+    # viz_same_img_in_different_dirs(first_dir=src_dir,
+    #                                # list_path = list_path,
+    #                                second_dir=compare_dir,
+    #                                resize_ratio=1.0)
 
     # csv_file = '/data20.04/data/MC_OCR/output_results/EDA/mcocr_train_df_filtered_rotate_new.csv'
     # img_dir = '/data20.04/data/MC_OCR/output_results/key_info_extraction/train_combine_lines/refine/imgs'

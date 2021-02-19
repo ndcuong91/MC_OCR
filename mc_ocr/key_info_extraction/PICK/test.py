@@ -20,7 +20,9 @@ from mc_ocr.config import cls_out_txt_dir, kie_boxes_transcripts, kie_model, \
     rot_out_img_dir, kie_out_txt_dir, kie_out_viz_dir, gpu, kie_visualize
 
 from typing import List, Tuple
+
 TypedStringSpan = Tuple[str, Tuple[int, int]]
+
 
 def bio_tags_to_spans2(
         tag_sequence: List[str], text_length: List[int] = None
