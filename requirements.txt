@@ -1,5 +1,4 @@
 torch==1.5.1
-torchvision==0.6.0
 torchsummary
 Cython
 trdg
