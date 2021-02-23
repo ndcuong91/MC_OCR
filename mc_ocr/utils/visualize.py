@@ -27,7 +27,7 @@ def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1]):
         draw_value = polygon.value
         if polygon.type in ignor_type:
             draw_value = ''
-        plt.text(polygon.list_pts[0][0], polygon.list_pts[0][1], draw_value, fontsize=15,
+        plt.text(polygon.list_pts[0][0], polygon.list_pts[0][1], draw_value, fontsize=10,
                  fontdict={"color": txt_color_map[polygon.type]})
     # plt.show()
 
@@ -224,8 +224,8 @@ if __name__ == '__main__':
 
     viz_icdar_multi(
         '/data20.04/data/data_Korea/WER_20210122/jpg',
-        '/home/cuongnd/PycharmProjects/aicr/aicr.core/aicr_core/res',
-        '/home/cuongnd/PycharmProjects/aicr/aicr.core/aicr_core/viz_imgs',
+        '/data20.04/data/data_Korea/WER_20210122/anno_icdar',
+        '/data20.04/data/data_Korea/WER_20210122/viz_anno',
         ignor_type=[],
         extract_kie_type=False)
 
