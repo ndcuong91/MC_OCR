@@ -235,6 +235,7 @@ File submit cuối cùng của team mình là *submit/mc_ocr_privater_test/resul
 | ------- | --------- | -------- |
 | 1. Quality evaluation  | RMSE: 0.12   | 3     |
 | 2. Key information extraction  | CER: 0.23   | 2     |
+Trang kết quả (team mình là SDSV_AICR): https://competitions.codalab.org/competitions/27798#results
 #### Open source đã sử dụng:
 - PaddleOCR: https://github.com/PaddlePaddle/PaddleOCR
 - PICK-Pytorch: https://github.com/wenwenyu/PICK-pytorch
