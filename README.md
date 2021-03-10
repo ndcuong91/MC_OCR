@@ -1,5 +1,5 @@
 # MC_OCR - TOP 2 solution cho bài toán trích xuất thông tin hóa đơn
-
+Trang chủ cuộc thi: https://rivf2021-mc-ocr.vietnlp.com/
 
 ## CÀI ĐẶT
 **Cài đặt source code và thư viện**
