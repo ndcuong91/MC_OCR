@@ -5,7 +5,7 @@ Trang chủ cuộc thi: https://rivf2021-mc-ocr.vietnlp.com/
 **Cài đặt source code và thư viện**
 
 ```
-cd mc_ocr
+cd MC_OCR
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
 pip3 install -e .
