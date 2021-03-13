@@ -197,15 +197,15 @@ class TextDetector(object):
 
 if __name__ == "__main__":
     args = utility.parse_args()
-    from mc_ocr.config import det_model_dir, raw_img_dir, det_visualize, \
-        det_out_viz_dir, det_out_txt_dir, det_db_thresh, det_db_box_thresh
 
-    args.image_dir = raw_img_dir
-    args.det_model_dir = det_model_dir
-    args.det_db_thresh = det_db_thresh
-    args.det_db_box_thresh = det_db_box_thresh
+    args.image_dir = '/home/duycuong/Desktop/vvn/imgs'
+    args.det_model_dir = '/home/duycuong/PycharmProjects/research_py3/MC_OCR/mc_ocr/text_detector/PaddleOCR/inference/ch_ppocr_server_v2.0_det_infer'
+    args.det_db_thresh = 0.5
+    args.det_db_box_thresh = 0.3
     args.use_gpu = False
-
+    det_visualize = True
+    det_out_viz_dir = '/home/duycuong/Desktop/vvn/output/viz_imgs'
+    det_out_txt_dir = '/home/duycuong/Desktop/vvn/output/txt'
     print(args)
     image_file_list = get_image_file_list(args.image_dir)
     text_detector = TextDetector(args)

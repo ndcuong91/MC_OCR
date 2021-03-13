@@ -7,14 +7,20 @@ OUTPUT_ROOT = '/data20.04/data/MC_OCR/test_output'
 def full_path(sub_path, file=False):
     path = os.path.join(CONFIG_ROOT, sub_path)
     if not file and not os.path.exists(path):
-        os.makedirs(path)
+        try:
+            os.makedirs(path)
+        except:
+            print('full_path. Error makedirs',path)
     return path
 
 
 def output_path(sub_path):
     path = os.path.join(OUTPUT_ROOT, sub_path)
     if not os.path.exists(path):
-        os.makedirs(path)
+        try:
+            os.makedirs(path)
+        except:
+            print('output_path. Error makedirs',path)
     return path
 
 gpu = '0'  # None or 0,1,2...

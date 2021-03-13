@@ -149,7 +149,7 @@ def draw_text_det_res(dt_boxes, img_path,save_path=None):
     result_txt_icdar=''
     for box in dt_boxes:
         box = np.array(box).astype(np.int32).reshape(-1, 2)
-        cv2.polylines(src_im, [box], True, color=(255, 255, 0), thickness=2)
+        cv2.polylines(src_im, [box], True, color=(0, 0, 255), thickness=2)
         poly_str = ','.join(
             [str(box[0][0]), str(box[0][1]), str(box[1][0]), str(box[1][1]), str(box[2][0]), str(box[2][1]),
              str(box[3][0]), str(box[3][1])])
