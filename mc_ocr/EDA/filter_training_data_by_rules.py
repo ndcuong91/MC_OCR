@@ -121,7 +121,7 @@ def filter_training_data_by_rules(csv_file, output_csv_file, output_filtered_dir
                 row[3] = '|||'.join(key)
                 row[2] = '|||'.join(value)
                 output_row.append(row)
-                #shutil.copy(os.path.join(img_dir, img_name), os.path.join(output_filtered_dir, img_name))
+                shutil.copy(os.path.join(img_dir, img_name), os.path.join(output_filtered_dir, img_name))
             else:
                 print(n, 'ignore', img_name)
         with open(output_csv_file, mode='w') as employee_file:
