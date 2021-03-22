@@ -248,8 +248,8 @@ Trong đó team mình sử dụng pre-trained từ PaddleOCR và Vietocr
 
 ## NHẬN XÉT 
 - Dữ liệu từ BTC khá lớn (tổng cộng 2k ảnh, với 1155 ảnh đã được gán nhãn). 
-Tuy nhiên, phàn lớn là hóa đơn từ MINIMART ANAN và Vincommerce nên sự đồng đều và đa dạng là không cao.
-- Dữ liệu đã gán nhãn có tỉ lệ lỗi khoảng 5-10%
+Tuy nhiên, phần lớn là hóa đơn từ MINIMART ANAN và Vincommerce nên sự đồng đều và đa dạng là không cao.
+- Dữ liệu đã gán nhãn có tỉ lệ gán nhãn lỗi khoảng 5-10%. Tỉ lệ này là chấp nhận được với một bộ dataset thực tế.
 - Yêu cầu không sử dụng dữ liệu ngoài với không gán nhãn thủ công khiến cho kết quả đạt được không quá tốt.
 
 ## TEAM MEMBER
