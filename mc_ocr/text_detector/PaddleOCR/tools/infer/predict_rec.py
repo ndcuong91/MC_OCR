@@ -116,6 +116,9 @@ class TextRecognizer(object):
 
 
 def main(args):
+    args.image_dir = '/home/duycuong/PycharmProjects/research_py3/MC_OCR/mc_ocr/text_detector/PaddleOCR/doc/imgs_words_en/word_10.png'
+    args.rec_char_dict_path = '/home/duycuong/PycharmProjects/research_py3/MC_OCR/mc_ocr/text_detector/PaddleOCR/ppocr/utils/dict/japan_dict.txt'
+    args.rec_model_dir = '/home/duycuong/PycharmProjects/research_py3/MC_OCR/mc_ocr/text_detector/PaddleOCR/inference/japan_mobile_v2.0_rec_infer'
     image_file_list = get_image_file_list(args.image_dir)
     text_recognizer = TextRecognizer(args)
     valid_image_file_list = []
@@ -129,6 +132,7 @@ def main(args):
             continue
         valid_image_file_list.append(image_file)
         img_list.append(img)
+
     try:
         rec_res, predict_time = text_recognizer(img_list)
     except:
@@ -145,6 +149,34 @@ def main(args):
                                                rec_res[ino]))
     logger.info("Total predict time for {} images, cost: {:.3f}".format(
         len(img_list), predict_time))
+
+
+class Classifier_Paddle:
+    def __init__(self, args):
+        print('Classifier_Paddle. Init')
+        args.rec_char_dict_path = '/home/duycuong/PycharmProjects/research_py3/MC_OCR/mc_ocr/text_detector/PaddleOCR/ppocr/utils/dict/japan_dict.txt'
+        args.rec_model_dir = '/home/duycuong/PycharmProjects/research_py3/MC_OCR/mc_ocr/text_detector/PaddleOCR/inference/japan_mobile_v2.0_rec_infer'
+
+        self.text_recognizer = TextRecognizer(args)
+
+    def inference(self, img_list, debug=False):
+        print('Classifier_Paddle. Inference', len(img_list), 'boxes')
+        try:
+            rec_res, predict_time = self.text_recognizer(img_list)
+        except:
+            print('Classifier_Paddle. Inference error!')
+        text_values = []
+        prob_value = []
+        for idx, f in enumerate(img_list):
+            s, prob = rec_res[idx][0], rec_res[idx][1]
+            if debug:
+                print(round(prob, 3), s)
+                cv2.imshow('sample', f)
+                cv2.waitKey(0)
+            text_values.append(s)
+            prob_value.append(prob)
+
+        return text_values, prob_value
 
 
 if __name__ == "__main__":

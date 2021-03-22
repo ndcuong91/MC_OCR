@@ -1,4 +1,7 @@
+import matplotlib
+matplotlib.rc('font', family='TakaoPGothic')
 from matplotlib import pyplot as plt
+
 import matplotlib.patches as patches
 import cv2, os, csv
 from mc_ocr.utils.common import poly, get_list_file_in_folder, get_list_gt_poly, type_map
@@ -27,7 +30,7 @@ def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1]):
         draw_value = polygon.value
         if polygon.type in ignor_type:
             draw_value = ''
-        plt.text(polygon.list_pts[0][0], polygon.list_pts[0][1], draw_value, fontsize=10,
+        plt.text(polygon.list_pts[0][0], polygon.list_pts[0][1], draw_value, fontsize=20,
                  fontdict={"color": txt_color_map[polygon.type]})
     # plt.show()
 
