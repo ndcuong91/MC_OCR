@@ -1,7 +1,7 @@
 import os
 
 CONFIG_ROOT = os.path.dirname(__file__)
-OUTPUT_ROOT = '/data20.04/data/MC_OCR/test_output'
+OUTPUT_ROOT = '/home/duycuong/data/MC_OCR/test_output2'
 
 
 def full_path(sub_path, file=False):
