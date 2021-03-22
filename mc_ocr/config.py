@@ -51,7 +51,7 @@ det_out_txt_dir = output_path('text_detector/{}/txt'.format(dataset))
 # rotation corrector
 rot_drop_thresh = [.5, 2]
 rot_visualize = True
-rot_model_path = full_path('rotation_corrector/weights/mobilenetv3-Epoch-487-Loss-0.03-Acc-0.99.pth')
+rot_model_path = full_path('rotation_corrector/weights/mobilenetv3-Epoch-487-Loss-0.03-Acc-0.99.pth', file=True)
 rot_out_img_dir = output_path('rotation_corrector/{}/imgs'.format(dataset))
 rot_out_txt_dir = output_path('rotation_corrector/{}/txt'.format(dataset))
 rot_out_viz_dir = output_path('rotation_corrector/{}/viz_imgs'.format(dataset))
@@ -60,15 +60,15 @@ rotate_filtered_csv = full_path('data/mcocr_train_df_rotate_filtered.csv', file=
 # text classifier (OCR)
 cls_visualize = True
 cls_ocr_thres = 0.65
-cls_model_path = full_path('text_classifier/vietocr/vietocr/weights/vgg19_bn_seq2seq.pth')
-cls_base_config_path = full_path('text_classifier/vietocr/config/base.yml')
-cls_config_path = full_path('text_classifier/vietocr/config/vgg-seq2seq.yml')
+cls_model_path = full_path('text_classifier/vietocr/vietocr/weights/vgg19_bn_seq2seq.pth', file=True)
+cls_base_config_path = full_path('text_classifier/vietocr/config/base.yml', file=True)
+cls_config_path = full_path('text_classifier/vietocr/config/vgg-seq2seq.yml', file=True)
 cls_out_viz_dir = output_path('text_classifier/{}/viz_imgs'.format(dataset))
 cls_out_txt_dir = output_path('text_classifier/{}/txt'.format(dataset))
 
 # key information
 kie_visualize = True
-kie_model = full_path('key_info_extraction/PICK/saved/models/PICK_Default/test_0121_212713/model_best.pth')
+kie_model = full_path('key_info_extraction/PICK/saved/models/PICK_Default/test_0121_212713/model_best.pth', file=True)
 kie_boxes_transcripts = output_path('key_info_extraction/{}/boxes_and_transcripts'.format(dataset))
 kie_out_txt_dir = output_path('key_info_extraction/{}/txt'.format(dataset))
 kie_out_viz_dir = output_path('key_info_extraction/{}/viz_imgs'.format(dataset))

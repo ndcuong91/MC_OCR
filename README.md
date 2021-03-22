@@ -56,14 +56,14 @@ Tập dữ liệu training do BTC đưa có có tổng cộng 1155 ảnh.
 Tuy nhiên team mình thấy nhiều ảnh trong số đó chưa đạt yêu cầu như gắn nhãn sai, nhầm thông tin... nên mình có dùng 1 số rules để lọc chúng đi.
 
 ```
-cd EDA
+cd mc_ocr/EDA
 python3 filter_training_data_by_rules.py
 ```
 Dữ liệu training sau khi lọc sẽ còn 1090 ảnh.
 
 Tiếp theo bên mình có lọc ra danh sách tên cửa hàng + địa chỉ từ dữ liệu training.
 ```
-cd EDA
+cd mc_ocr/EDA
 python3 get_store_dict.py
 ```
 Kết quả sã là file *final_data.json* chứa danh sách các cửa hàng (tên và địa chỉ). 
