@@ -231,10 +231,12 @@ File submit cuối cùng của team mình là *submit/mc_ocr_privater_test/resul
 
 ## TỔNG KẾT 
 #### Kết quả trên tập private test
-| **Task** |  **Score** |  **Top** |
-| ------- | --------- | -------- |
-| 1. Quality evaluation  | RMSE: 0.12   | 3     |
-| 2. Key information extraction  | CER: 0.23   | 2     |
+| **Task** |  **Score** |  **Top** | **Speed** |
+| ------- | --------- | -------- | --------- |
+| 1. Quality evaluation  | RMSE: 0.12   | 3     | 2ms (GPU) |
+| 2. Key information extraction  | CER: 0.23   | 2     | < 1s (GPU) |
+
+GPU team mình sử dụng là Nvidia RTX 2080 Ti
 
 Trang kết quả (team mình là SDSV_AICR): https://competitions.codalab.org/competitions/27798#results
 #### Open source đã sử dụng:
