@@ -27,13 +27,13 @@ pip3 install -r requirements.txt
 pip3 install -e .
 ```
 ```
-cd text_detector/PaddleOCR
+cd mc_ocr/text_detector/PaddleOCR
 pip3 install -e .
 python3 -m pip install paddlepaddle==2.0rc1 -i https://mirror.baidu.com/pypi/simple
 ```
 
 ```
-cd text_classifier/vietocr
+cd mc_ocr/text_classifier/vietocr
 pip3 install -e .
 ```
 
@@ -272,6 +272,6 @@ Tuy nhiên, khá nhiều là hóa đơn từ MINIMART ANAN và Vincommerce nên 
 - Yêu cầu không sử dụng dữ liệu ngoài với không gán nhãn thủ công khiến cho kết quả đạt được không quá tốt.
 
 ## TEAM MEMBER
-- cuongnd (nd.cuong1@samsung.com/nguyenduycuong2004@gmail.com)
+- cuongnd (nd.cuong1@samsung.com / nguyenduycuong2004@gmail.com)
 - anhnt (nt.anh6@samsung.com)
 - chungnx (nx.chung@samsung.com)
