@@ -1,11 +1,27 @@
 # MC_OCR - TOP 2 solution cho bài toán trích xuất thông tin hóa đơn
-Trang chủ cuộc thi: https://rivf2021-mc-ocr.vietnlp.com/
+## Giới thiệu
+Cuộc thi MC_OCR bao gồm 2 tasks là (1) Đánh giá chất lượng hóa đơn và (2) trích xuất thông tin quan trọng từ ảnh chụp hóa đơn bán lẻ ở Việt Nam. Chi tiết hơn các bạn có thể xem tại
+trang chủ cuộc thi: https://rivf2021-mc-ocr.vietnlp.com/ . Dưới đây là một vài ảnh mẫu 
+
+![samples](https://github.com/ndcuong91/MC_OCR/blob/master/mc_ocr_samples.JPG)
+
+Các đội tham gia chỉ có 1 tháng để làm. Ngoài ra BTC không cho phép gán nhãn bằng tay, không sử dụng dữ liệu ngoài và phải đăng ký pretrained models với tất cả các tasks, có lẽ là để đảm bảo công bằng cho tất cả các đội
+
+
 
 ## CÀI ĐẶT
-**Cài đặt source code và thư viện**
+**Environments**
+- Python 3.6
+- Cuda toolkit 10.2
+
+**Clone source code**
 
 ```
-cd mc_ocr
+git clone https://github.com/ndcuong91/MC_OCR.git
+cd MC_OCR
+```
+**Cài đặt**
+```
 pip3 install --upgrade pip
 pip3 install -r requirements.txt
 pip3 install -e .
@@ -75,7 +91,7 @@ Hệ thống của team mình có 5 bước chính giống như hình vẽ dư�
 
 ![AICR](https://github.com/ndcuong91/MC_OCR/blob/master/pipeline_task_2.JPG)
 
-Trước hết, các bạn hãy sửa biến sau trong file *config.py*
+Trước hết, các bạn hãy sửa biến sau trong file *mc_ocr/config.py*
 ```
 dataset = 'mc_ocr_train_filtered'
 ```
@@ -83,7 +99,7 @@ dataset = 'mc_ocr_train_filtered'
 #### 1. text_detector 
 Bước này sẽ tìm vị trí của vùng chữ trên ảnh. Team mình sử dụng pre-trained từ [PaddleOCR](https://github.com/PaddlePaddle/PaddleOCR) mà không finetune lại gì cả. 
 Các bạn hãy download pre-trained từ link [này](https://paddleocr.bj.bcebos.com/dygraph_v2.0/ch/ch_ppocr_server_v2.0_det_infer.tar), 
-giải nén và chỉnh sửa đường dẫn đến pre-trained trong file *config.py*
+giải nén và chỉnh sửa đường dẫn đến pre-trained trong file *mc_ocr/config.py*
 ```buildoutcfg
 det_model_dir = [your extracted folder]
 ```
@@ -93,27 +109,30 @@ Feature extractor được sử dụng là Mobilenetv3.
 
 Đầu tiên các bạn hãy chạy phần **text detector**
 ```
-cd text_detector/PaddleOCR
+cd mc_ocr/text_detector/PaddleOCR
 python3 tools/infer/predict_det.py
 ```
 
 Sau đó lọc các ảnh bị ngược hoặc xoay ngang trong tập train (sử dụng confidence của text classify để lọc, với threshold là 0.7)
 ```
+cd mc_ocr/rotation_corrector
 python3 process_mc_ocr_data.py
 ```
     
 Tạo synthetic data và augmentation real data từ dữ liệu ở trên:
 ```
+cd mc_ocr/rotation_corrector
 python3 data_process.py
 ``` 
     
-Cuối cùng, sửa line 10, 11 file *rotation_corrector/experiments/mobilenetv3_filtered_public_train.yaml* 
+Cuối cùng, sửa line 10, 11 file *mc_ocr/rotation_corrector/experiments/mobilenetv3_filtered_public_train.yaml* 
 theo đường dẫn từ bước 2. (base_output_dir) để training
 ```
+cd mc_ocr/rotation_corrector
 python3 train_config.py --cfg experiments/mobilenetv3_filtered_public_train.yaml
 ```
     
-Pre-trained team mình sử dụng đã để sẵn trong *rotation_corrector/weights*
+Pre-trained team mình sử dụng đã để sẵn trong *mc_ocr/rotation_corrector/weights*
 
 #### 3. textline rotation
 Sau khi xoay lại hóa đơn sẽ vẫn còn nhiều dòng chữ bị nghiêng, 
@@ -131,7 +150,7 @@ cls_model_path = [your downloaded model]
 #### 5. key information extraction
 Bước này sử dụng [PICK model](https://github.com/wenwenyu/PICK-pytorch) của tác giả wenwenyu để trích xuất thông tin từ hóa đơn. Team mình có tạo dữ liệu và huấn luyện mô hình từ đầu cho bước này.
 
-Đầu tiên, hãy sửa các biến sau trong file *config.py*: 
+Đầu tiên, hãy sửa các biến sau trong file *mc_ocr/config.py*: 
 ```
 dataset = 'mc_ocr_train_filtered'
 det_visualize = False
@@ -140,31 +159,31 @@ cls_visualize = False
 ```
 Sau đó, chạy lần lượt các bước **text detector**, **rotation corrector** và **text classifier**
 ```
-cd text_detector/PaddleOCR
+cd mc_ocr/text_detector/PaddleOCR
 python3 tools/infer/predict_det.py
 ```
 
 ```
-cd rotation_corrector
+cd mc_ocr/rotation_corrector
 python3 inference.py
 ```
 
 ```
-cd text_classifier
+cd mc_ocr/text_classifier
 python3 pred_ocr.py
 ```
 
 Dùng model thu được ở bước **2. rotation_corrector** để chỉnh sửa file csv:
 
 ```
-cd rotation_corrector
+cd mc_ocr/rotation_corrector
 python3 rotate_csv.py
 ```
 
 Sau đó chuẩn bị dữ liệu training
 
 ```
-cd key_info_extraction
+cd mc_ocr/key_info_extraction
 python3 create_train_data.py
 ```
 Bước trên sẽ tạo ra 2 file train.csv và val.csv trong thư mục ... Tiếp theo các bạn hãy chỉnh sửa đường dẫn đến 2 file trên trong file *key_info_extraction/PICK/config.json* (line 59 và 74)
@@ -172,7 +191,7 @@ Bước trên sẽ tạo ra 2 file train.csv và val.csv trong thư mục ... Ti
 Cuối cùng sẽ là bước training 
  
 ```
-cd key_info_extraction/PICK
+cd mc_ocr/key_info_extraction/PICK
 bash run.sh
 ```
 Kết quả của bước training sẽ là file *model_best.pth* nằm trong thư mục *key_info_extraction/PICK/saved/models/PICK_Default/test...*
@@ -185,7 +204,7 @@ model mà team mình train được có thể download tại [đây](https://dri
 
 ### SUBMISSION 
 
-Chuyển dataset sang private test trong file *config.py*
+Chuyển dataset sang private test trong file *mc_ocr/config.py*
 
 ```
 dataset = 'mc_ocr_private_test'
@@ -194,40 +213,40 @@ Sau đó chạy lần lượt các bước sau
 
 **text detector**
 ```
-cd text_detector/PaddleOCR
+cd mc_ocr/text_detector/PaddleOCR
 python3 tools/infer/predict_det.py
 
 ```
 
 **rotation corrector**
 ```
-cd rotation_corrector
+cd mc_ocr/rotation_corrector
 python3 inference.py
 
 ```
 
 **text classifier**
 ```
-cd text_classifier
+cd mc_ocr/text_classifier
 python3 pred_ocr.py
 
 ```
 
 **key information extraction**
 ```
-cd key_info_extraction/PICK
+cd mc_ocr/key_info_extraction/PICK
 python3 test.py
 
 ```
 **submission**
 ```
-cd submit
+cd mc_ocr/submit
 python3 submit.py
 
 ```
 Kết quả cuối cùng là file *submit/mc_ocr_private_test/result.csv*. 
 
-File submit cuối cùng của team mình là *submit/mc_ocr_privater_test/results_2301_3_merged.zip*
+File submit cuối cùng của team mình trong cuộc thi là *submit/mc_ocr_privater_test/results_2301_3_merged.zip*
 
 ## TỔNG KẾT 
 #### Kết quả trên tập private test
@@ -248,11 +267,11 @@ Trong đó team mình sử dụng pre-trained từ PaddleOCR và Vietocr
 
 ## NHẬN XÉT 
 - Dữ liệu từ BTC khá lớn (tổng cộng 2k ảnh, với 1155 ảnh đã được gán nhãn). 
-Tuy nhiên, phần lớn là hóa đơn từ MINIMART ANAN và Vincommerce nên sự đồng đều và đa dạng là không cao.
+Tuy nhiên, khá nhiều là hóa đơn từ MINIMART ANAN và Vincommerce nên sự đồng đều và đa dạng là không cao.
 - Dữ liệu đã gán nhãn có tỉ lệ gán nhãn lỗi khoảng 5-10%. Tỉ lệ này là chấp nhận được với một bộ dataset thực tế.
 - Yêu cầu không sử dụng dữ liệu ngoài với không gán nhãn thủ công khiến cho kết quả đạt được không quá tốt.
 
 ## TEAM MEMBER
-- cuongnd (nd.cuong1@samsung.com)
+- cuongnd (nd.cuong1@samsung.com/nguyenduycuong2004@gmail.com)
 - anhnt (nt.anh6@samsung.com)
 - chungnx (nx.chung@samsung.com)
