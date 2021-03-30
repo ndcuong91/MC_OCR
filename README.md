@@ -249,6 +249,10 @@ Kết quả cuối cùng là file *submit/mc_ocr_private_test/result.csv*.
 
 File submit cuối cùng của team mình trong cuộc thi là *submit/mc_ocr_privater_test/results_2301_3_merged.zip*
 
+Dưới đây là 1 vài kết quả sau khi visualize:
+
+![sample_res](https://github.com/ndcuong91/MC_OCR/blob/master/sample_res.png)
+
 ## TỔNG KẾT 
 #### Kết quả trên tập private test
 | **Task** |  **Score** |  **Top** | **Speed** |
