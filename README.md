@@ -7,7 +7,7 @@ trang chủ cuộc thi: https://rivf2021-mc-ocr.vietnlp.com/ . Dưới đây là
 
 Các đội tham gia chỉ có 1 tháng để làm. Ngoài ra BTC không cho phép gán nhãn bằng tay, không sử dụng dữ liệu ngoài và phải đăng ký pretrained models với tất cả các tasks, có lẽ là để đảm bảo công bằng cho tất cả các đội
 
-Dưới đây là các bước team mình đã thực hiện để đạt được top 2 cho task (2)
+Dưới đây là các bước team mình đã thực hiện để giải quyết bài toán này
 
 ## CÀI ĐẶT
 **Environments**
