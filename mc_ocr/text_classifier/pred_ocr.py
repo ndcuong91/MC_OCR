@@ -5,24 +5,18 @@ from mc_ocr.utils.visualize import viz_icdar
 from vietocr.vietocr_class import Classifier_Vietocr
 import numpy as np
 from mc_ocr.rotation_corrector.utils.line_angle_correction import rotate_and_crop
-from mc_ocr.text_detector.PaddleOCR.tools.infer.predict_rec import Classifier_Paddle
-from mc_ocr.text_detector.PaddleOCR.tools.infer.utility import parse_args
+from mc_ocr.config import rot_out_img_dir, rot_out_txt_dir, cls_out_viz_dir, \
+    cls_out_txt_dir, cls_visualize, gpu, cls_ocr_thres
 
 os.environ["PYTHONIOENCODING"] = "utf-8"
 pred_time = datetime.today().strftime('%Y-%m-%d_%H-%M')
 
-img_dir = '/home/duycuong/Desktop/vvn/imgs'
+img_dir = rot_out_img_dir
 img_path = ''
-anno_dir = '/home/duycuong/Desktop/vvn/output/detector/txt'
+anno_dir = rot_out_txt_dir
 anno_path = ''
 
-cls_out_viz_dir = '/home/duycuong/Desktop/vvn/output/classifier/viz_imgs'
-cls_out_txt_dir = '/home/duycuong/Desktop/vvn/output/classifier/txt'
-cls_visualize = True
-gpu = '0'
-cls_ocr_thres = 0.3
 write_file = True
-paddleOCR = True
 
 def init_models(gpu='0'):
     if gpu != None:
@@ -30,10 +24,7 @@ def init_models(gpu='0'):
         os.environ['CUDA_VISIBLE_DEVICES'] = gpu
     else:
         print('Use CPU')
-    if paddleOCR:
-        classifier = Classifier_Paddle(parse_args())
-    else:
-        classifier = Classifier_Vietocr()
+    classifier = Classifier_Vietocr()
     return classifier
 
 
