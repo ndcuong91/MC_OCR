@@ -1,4 +1,5 @@
 # MC_OCR - TOP 2 solution cho bài toán trích xuất thông tin hóa đơn
+*Update 30 Mar 2021* : Nếu các bạn không chạy được source code, hãy tạo issues và mình sẽ sửa trong thời gian sớm nhất.
 ## Giới thiệu
 Cuộc thi MC_OCR bao gồm 2 tasks là (1) Đánh giá chất lượng hóa đơn và (2) trích xuất thông tin quan trọng từ ảnh chụp hóa đơn bán lẻ ở Việt Nam. Chi tiết hơn các bạn có thể xem tại
 trang chủ cuộc thi: https://rivf2021-mc-ocr.vietnlp.com/ . Dưới đây là một vài ảnh mẫu 
