@@ -12,7 +12,7 @@ txt_color_map = {1: 'b', 15: 'green', 16: 'blue', 17: 'm', 18: 'cyan'}
 inv_type_map = {v: k for k, v in type_map.items()}
 
 
-def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1]):
+def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1], viz_img_size=[20,20], fontsize=20):
     '''
     visualize polygon
     :param img: numpy image read by opencv
@@ -21,7 +21,7 @@ def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1]):
     :return:
     '''
     fig, ax = plt.subplots(1)
-    fig.set_size_inches(20, 20)
+    fig.set_size_inches(viz_img_size[0],viz_img_size[1])
     plt.imshow(img)
 
     for polygon in list_poly:
@@ -30,7 +30,7 @@ def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1]):
         draw_value = polygon.value
         if polygon.type in ignor_type:
             draw_value = ''
-        plt.text(polygon.list_pts[0][0], polygon.list_pts[0][1], draw_value, fontsize=20,
+        plt.text(polygon.list_pts[0][0], polygon.list_pts[0][1], draw_value, fontsize=fontsize,
                  fontdict={"color": txt_color_map[polygon.type]})
     # plt.show()
 
@@ -39,7 +39,7 @@ def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1]):
         fig.savefig(save_viz_path, bbox_inches='tight')
 
 
-def viz_icdar(img_path, anno_path, save_viz_path=None, extract_kie_type=False, ignor_type=[1]):
+def viz_icdar(img_path, anno_path, save_viz_path=None, extract_kie_type=False, ignor_type=[1], viz_img_size=[20,20], fontsize=20):
     if not isinstance(img_path, str):
         image = img_path
     else:
@@ -73,7 +73,9 @@ def viz_icdar(img_path, anno_path, save_viz_path=None, extract_kie_type=False, i
     viz_poly(img=image,
              list_poly=list_poly,
              save_viz_path=save_viz_path,
-             ignor_type=ignor_type)
+             ignor_type=ignor_type,
+             viz_img_size = viz_img_size,
+             fontsize=fontsize)
 
 
 def viz_icdar_multi(img_dir, anno_dir, save_viz_dir, extract_kie_type=False, ignor_type=[1]):
@@ -108,7 +110,7 @@ def viz_same_img_in_different_dirs(first_dir, second_dir, list_path=None, resize
                                    (int(resize_ratio * first_img.shape[1]), int(resize_ratio * first_img.shape[0])))
         cv2.imshow('first_img', first_img_res)
 
-        second_img_path = os.path.join(second_dir, file.replace('.jpg', '') + '_ model_epoch_639_minibatch_243000_ 0.1.jpg')
+        second_img_path = os.path.join(second_dir, file)
         second_img = cv2.imread(second_img_path)
         second_img_res = cv2.resize(second_img,
                                     (int(resize_ratio * second_img.shape[1]), int(resize_ratio * second_img.shape[0])))
@@ -169,10 +171,10 @@ def viz_output_of_pick(img_dir, output_txt_dir, output_viz_dir):
         list_poly = []
         for line in output_txt:
             coordinates, type, text = line.replace('\n', '').split('\t')
-            find_poly = poly(coordinates, type=inv_type_map[type], value=text)
+            find_poly = poly(coordinates, type=1, value=text)
             list_poly.append(find_poly)
 
-        img_name = file.replace('.txt', '.jpg')
+        img_name = file.replace('.txt', '.png')
         image = cv2.imread(os.path.join(img_dir, img_name))
         image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
         viz_poly(img=image,
@@ -225,21 +227,21 @@ if __name__ == '__main__':
     #           anno_path=anno_path,
     #           save_viz_path=save_vix_path)
 
-    viz_icdar_multi(
-        '/data20.04/data/data_Korea/WER_20210122/jpg',
-        '/data20.04/data/data_Korea/WER_20210122/anno_icdar',
-        '/data20.04/data/data_Korea/WER_20210122/viz_anno',
-        ignor_type=[],
-        extract_kie_type=False)
+    # viz_icdar_multi(
+    #     '/data20.04/data/data_Korea/WER_20210122/jpg',
+    #     '/data20.04/data/data_Korea/WER_20210122/anno_icdar',
+    #     '/data20.04/data/data_Korea/WER_20210122/viz_anno',
+    #     ignor_type=[],
+    #     extract_kie_type=False)
 
-    # src_dir = '/home/cuongnd/PycharmProjects/aicr/viText/viText/viData/viReceipts/viz_imgs'
-    # compare_dir = '/home/cuongnd/PycharmProjects/aicr/aicr.core/aicr_core/outputs/predict_end2end/viReceipts_2021-02-04_10-50'
+    # src_dir = '/home/vvn/PycharmProjects/MC_OCR/mc_ocr/data/baocaotaichinh'
+    # compare_dir = '/data_backup/cuongnd/mc_ocr/output_result/rotation_corrector/baocaotaichinh/viz_imgs'
     # list_path = '/home/cuongnd/PycharmProjects/mc_ocr/mc_ocr/submit/mc_ocr_private_test/check_coopmart.txt'
     #
     # viz_same_img_in_different_dirs(first_dir=src_dir,
     #                                # list_path = list_path,
     #                                second_dir=compare_dir,
-    #                                resize_ratio=1.0)
+    #                                resize_ratio=0.5)
 
     # csv_file = '/data20.04/data/MC_OCR/output_results/EDA/mcocr_train_df_filtered_rotate_new.csv'
     # img_dir = '/data20.04/data/MC_OCR/output_results/key_info_extraction/train_combine_lines/refine/imgs'
@@ -248,13 +250,13 @@ if __name__ == '__main__':
     #           viz_dir=viz_dir,
     #           img_dir=img_dir)
 
-    # img_dir = '/data20.04/data/MC_OCR/output_results/key_info_extraction/private_test_pick/imgs'
-    # output_txt_dir = '/data20.04/data/MC_OCR/output_results/key_info_extraction/private_test_pick/output/txt'
-    # output_viz_dir =  '/data20.04/data/MC_OCR/output_results/key_info_extraction/private_test_pick/output/viz_imgs_new'
-    #
-    # viz_output_of_pick(img_dir=img_dir,
-    #                    output_txt_dir=output_txt_dir,
-    #                    output_viz_dir=output_viz_dir)
+    img_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/images'
+    output_txt_dir = '/data_backup/cuongnd/mc_ocr/output_result/key_info_extraction/SaleContract/txt'
+    output_viz_dir =  '/data_backup/cuongnd/mc_ocr/output_result/key_info_extraction/SaleContract/viz_imgs'
+
+    viz_output_of_pick(img_dir=img_dir,
+                       output_txt_dir=output_txt_dir,
+                       output_viz_dir=output_viz_dir)
 
     # csv_file = '/data20.04/data/MC_OCR/output_results/EDA/mcocr_train_df_filtered_rotate_new.csv'
     # img_dir = '/data20.04/data/MC_OCR/output_results/box_rectify/train_pred_lines_filtered/imgs'

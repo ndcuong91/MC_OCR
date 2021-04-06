@@ -82,7 +82,7 @@ def main():
         test_img = cv2.imread(os.path.join(img_dir, img_name))
         begin_detector = time.time()
         if img_path == '':
-            anno_path = os.path.join(anno_dir, img_name.replace('.jpg', '.txt'))
+            anno_path = os.path.join(anno_dir, img_name.replace('.jpg', '.txt').replace('.png', '.txt'))
         boxes_list = get_list_boxes_from_icdar(anno_path)
 
         end_detector = time.time()
@@ -135,7 +135,12 @@ def main():
             write_output(boxes_list, final_values, final_probs, output_txt_path, prob_thres=cls_ocr_thres)
 
         if cls_visualize:
-            viz_icdar(os.path.join(img_dir, img_name), output_txt_path, output_viz_path, ignor_type=[])
+            viz_icdar(os.path.join(img_dir, img_name),
+                      output_txt_path,
+                      output_viz_path,
+                      ignor_type=[],
+                      viz_img_size=[40,40],
+                      fontsize=15)
             end_visualize = time.time()
             print('Visualize time:', end_visualize - end_classifier, 'seconds')
 

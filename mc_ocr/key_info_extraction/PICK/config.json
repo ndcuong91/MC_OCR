@@ -56,7 +56,7 @@
     "train_dataset": {
         "type": "PICKDataset",
         "args": {
-            "files_name": "/data20.04/data/MC_OCR/output_results/key_info_extraction/mc_ocr_train/train_list.csv",
+            "files_name": "/data_backup/cuongnd/sale_contract_viettel/SaleContract/train_list.csv",
             "boxes_and_transcripts_folder": "boxes_and_transcripts",
             "images_folder": "images",
             "entities_folder": "entities",
@@ -71,7 +71,7 @@
     "validation_dataset": {
         "type": "PICKDataset",
         "args": {
-            "files_name": "/data20.04/data/MC_OCR/output_results/key_info_extraction/mc_ocr_train/val_list.csv",
+            "files_name": "/data_backup/cuongnd/sale_contract_viettel/SaleContract/val_list.csv",
             "boxes_and_transcripts_folder": "boxes_and_transcripts",
             "images_folder": "images",
             "entities_folder": "entities",
@@ -89,17 +89,17 @@
             "batch_size": 2,
             "shuffle": true,
             "drop_last": true,
-            "num_workers": 8,
+            "num_workers": 0,
             "pin_memory": true
         }
     },
     "val_data_loader": {
         "type": "DataLoader",
         "args": {
-            "batch_size": 4,
+            "batch_size": 2,
             "shuffle": false,
             "drop_last": false,
-            "num_workers": 8,
+            "num_workers": 0,
             "pin_memory": true
         }
     },
@@ -119,7 +119,7 @@
         }
     },
     "trainer": {
-        "epochs": 100,
+        "epochs": 5000,
         "gl_loss_lambda": 0.01,
         "log_step_interval": 10,
         "val_step_interval": 50,
@@ -128,7 +128,7 @@
         "log_verbosity": 2,
         "monitor": "max overall-mEF",
         "monitor_open": true,
-        "early_stop": 40,
+        "early_stop": 400,
         "anomaly_detection": false,
         "tensorboard": false,
         "sync_batch_norm": false

@@ -92,13 +92,13 @@ class PICKDataset(Dataset):
             # config file path
             boxes_and_transcripts_file = self.boxes_and_transcripts_folder.joinpath(
                 Path(dataitem['file_name']).stem + '.tsv')
-            image_file = self.images_folder.joinpath(Path(dataitem['file_name']).stem + '.jpg')
+            image_file = self.images_folder.joinpath(Path(dataitem['file_name']).stem + '.png')
             entities_file = self.entities_folder.joinpath(Path(dataitem['file_name']).stem + '.txt')
             # documnets_class = dataitem['document_class']
         else:
             boxes_and_transcripts_file = self.boxes_and_transcripts_folder.joinpath(
                 Path(self.files_list[index]).stem + '.tsv')
-            image_file = self.images_folder.joinpath(Path(self.files_list[index]).stem + '.jpg')
+            image_file = self.images_folder.joinpath(Path(self.files_list[index]).stem + '.png')
 
         if not boxes_and_transcripts_file.exists() or not image_file.exists():
             if self.ignore_error and self.training:

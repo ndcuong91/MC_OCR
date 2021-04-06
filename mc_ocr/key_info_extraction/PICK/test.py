@@ -122,7 +122,7 @@ def main(args):
 
                 result_file = output_path.joinpath(Path(test_dataset.files_list[image_index]).stem + '.txt')
                 base_filename = os.path.basename(result_file)
-                list_coors = get_list_coors_from_line_pos_from_bottom(args.impt, base_filename.replace('.txt', '.jpg'),
+                list_coors = get_list_coors_from_line_pos_from_bottom(args.impt, base_filename.replace('.txt', '.png'),
                                                                       boxes_coors, line_pos_from_bottom)
                 with result_file.open(mode='w', encoding='utf8') as f:
                     for jdx, item in enumerate(entities):

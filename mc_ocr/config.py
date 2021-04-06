@@ -1,7 +1,7 @@
 import os
 
 CONFIG_ROOT = os.path.dirname(__file__)
-OUTPUT_ROOT = '/home/duycuong/data/MC_OCR/test_output2'
+OUTPUT_ROOT = '/data_backup/cuongnd/mc_ocr/output_result'
 
 
 def full_path(sub_path, file=False):
@@ -24,10 +24,9 @@ def output_path(sub_path):
     return path
 
 gpu = '0'  # None or 0,1,2...
-dataset = 'mc_ocr_private_test'
+dataset = 'SaleContract'
 # mc_ocr_train_filtered
 # mc_ocr_private_test
-# wer_20210125
 # viReceipts
 
 # input data from organizer
@@ -68,7 +67,7 @@ cls_out_txt_dir = output_path('text_classifier/{}/txt'.format(dataset))
 
 # key information
 kie_visualize = True
-kie_model = full_path('key_info_extraction/PICK/saved/models/PICK_Default/test_0121_212713/model_best.pth', file=True)
+kie_model = full_path('/home/vvn/PycharmProjects/MC_OCR/mc_ocr/key_info_extraction/PICK/saved/models/PICK_Default/test_0405_221255/model_best.pth', file=True)
 kie_boxes_transcripts = output_path('key_info_extraction/{}/boxes_and_transcripts'.format(dataset))
 kie_out_txt_dir = output_path('key_info_extraction/{}/txt'.format(dataset))
 kie_out_viz_dir = output_path('key_info_extraction/{}/viz_imgs'.format(dataset))

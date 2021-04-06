@@ -17,7 +17,7 @@ from utils.entities_list import Entities_list
 from utils.class_utils import keys_vocab_cls, iob_labels_vocab_cls, entities_vocab_cls
 
 MAX_BOXES_NUM = 130  # limit max number boxes of every documents
-MAX_TRANSCRIPT_LEN = 70  # limit max length text of every box
+MAX_TRANSCRIPT_LEN = 100  # limit max length text of every box
 
 # text string label converter
 TextSegmentsField = Field(sequential=True, use_vocab=True, include_lengths=True, batch_first=True)

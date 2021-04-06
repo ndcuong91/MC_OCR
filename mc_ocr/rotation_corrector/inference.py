@@ -109,10 +109,12 @@ def main():
     list_img_path = get_list_file_in_folder(img_dir)
     list_img_path = sorted(list_img_path)
     for idx, img_name in enumerate(list_img_path):
+        if idx < 0:
+            continue
         print('\n',idx,'Inference', img_name)
         test_img = cv2.imread(os.path.join(img_dir, img_name))
         begin_detector = time.time()
-        anno_path = os.path.join(anno_dir, img_name.replace('.jpg', '.txt'))
+        anno_path = os.path.join(anno_dir, img_name.replace('.jpg', '.txt').replace('.png', '.txt'))
         boxes_list = get_list_boxes_from_icdar(anno_path)
         boxes_list = drop_box(boxes_list, drop_gap=rot_drop_thresh)
         rotation = get_mean_horizontal_angle(boxes_list, False)

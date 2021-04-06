@@ -128,7 +128,6 @@ class TextDetector(object):
             points[pno, 1] = int(min(max(points[pno, 1], 0), img_height - 1))
         return points
 
-
     def filter_tag_det_res(self, dt_boxes, image_shape):
         img_height, img_width = image_shape[0:2]
         dt_boxes_new = []
@@ -205,6 +204,19 @@ if __name__ == "__main__":
     args.det_db_thresh = det_db_thresh
     args.det_db_box_thresh = det_db_box_thresh
     args.use_gpu = False
+    args.det_db_thresh = 0.2
+    args.det_limit_side_len = 1600
+
+    # args.det_max_side_len = 1600
+    # args.det_algorithm = 'DB'
+    # this_dir = os.path.dirname(__file__)
+    # args.det_model_dir = os.path.join(this_dir, 'models', 'ch_ppocr_server_v1.1_det_infer')
+    # args.det_db_thresh = 0.2
+    # args.det_db_box_thresh = 0.3
+    # args.det_db_unclip_ratio = 1.6
+    # args.use_pdserving = False
+    # args.use_gpu = USING_GPU
+    # args.gpu_mem = 4000
 
     print(args)
     image_file_list = get_image_file_list(args.image_dir)
@@ -226,7 +238,7 @@ if __name__ == "__main__":
         count += 1
         logger.info("{} Predict time of {}: {}".format(count, image_file, elapse))
         img_name_pure = os.path.split(image_file)[-1]
-        output_txt_path = os.path.join(det_out_txt_dir, img_name_pure.replace('.jpg', '.txt'))
+        output_txt_path = os.path.join(det_out_txt_dir, img_name_pure.replace('.jpg', '.txt').replace('.png', '.txt'))
         src_im = utility.draw_text_det_res(dt_boxes, image_file, save_path=output_txt_path)
         if det_visualize:
             img_path = os.path.join(det_out_viz_dir, "{}".format(img_name_pure))

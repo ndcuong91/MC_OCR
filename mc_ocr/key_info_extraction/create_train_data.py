@@ -1,9 +1,10 @@
 import csv, cv2, os, json, random
 import numpy as np
 from mc_ocr.utils.common import IoU, cer_loss_one_image, type_map, \
-    color_map,get_list_gt_poly, get_list_icdar_poly, get_list_file_in_folder, euclidean_distance
+    color_map, get_list_gt_poly, get_list_icdar_poly, get_list_file_in_folder, euclidean_distance
 from mc_ocr.utils.spell_check import validate_SELLER, validate_TOTAL_COST_amount, \
     validate_ADDRESS, validate_TIMESTAMP, validate_TOTAL_COST_keys
+
 
 def parse_anno_from_csv_to_icdar_result(csv_file, icdar_dir, output_dir, img_dir=None, debug=False):
     with open(csv_file) as csv_file:
@@ -62,7 +63,7 @@ def parse_anno_from_csv_to_icdar_result(csv_file, icdar_dir, output_dir, img_dir
                     print(' not match gt  :', pol.value)
                     print('Max_iou', max_iou)
                     if debug:
-                        gt_img_res = cv2.resize(gt_img, (int(gt_img.shape[1]/2),int(gt_img.shape[0]/2)))
+                        gt_img_res = cv2.resize(gt_img, (int(gt_img.shape[1] / 2), int(gt_img.shape[0] / 2)))
                         cv2.imshow('not match gt box', gt_img_res)
                         cv2.waitKey(0)
 
@@ -80,11 +81,10 @@ def parse_anno_from_csv_to_icdar_result(csv_file, icdar_dir, output_dir, img_dir
                       round(total_boxes_not_match / total_boxes, 3))
 
 
-
 def find_TOTALCOST_val_poly(keys_poly, list_poly, expand_ratio=0.2):
     total_x, total_y = 0, 0
     min_h, max_h = 5000, 0
-    value=None
+    value = None
     for pts in keys_poly.list_pts:
         total_x += pts[0]
         total_y += pts[1]
@@ -114,6 +114,7 @@ def find_TOTALCOST_val_poly(keys_poly, list_poly, expand_ratio=0.2):
         list_poly[min_idx].type = 18
         value = list_poly[min_idx].value
     return value
+
 
 def modify_kie_training_data_by_rules(txt_dir, json_data_path, debug=False):
     list_files = get_list_file_in_folder(txt_dir, ext=['.txt'])
@@ -225,9 +226,35 @@ def create_data_pick_csv_train_val(train_dir, train_ratio=0.92):
         f.writelines(val_txt_list)
     print('Done')
 
+
+def combine_2_icdar_dir_to_creat_pick_boxes_and_transcripts(icdar_ocr_dir, icdar_entity_dir, output_dir, iou_thres=0.82):
+    list_file = get_list_file_in_folder(icdar_ocr_dir, ext=['txt'])
+    for idx, anno in enumerate(list_file):
+        print(idx, anno)
+        list_icdar_ocr_poly = get_list_icdar_poly(os.path.join(icdar_ocr_dir, anno))
+        list_icdar_entity_poly = get_list_icdar_poly(os.path.join(icdar_entity_dir, anno))
+
+        for jdx, ocr_pol in enumerate(list_icdar_ocr_poly):
+            iou = IoU(ocr_pol, list_icdar_entity_poly[jdx], False)
+            if iou > iou_thres:
+                ocr_pol.type = list_icdar_entity_poly[jdx].value.replace('beneficiary','ben')
+                if ocr_pol.type =='text':
+                    ocr_pol.type = 'other'
+            else:
+                print('error!')
+
+        output_icdar_txt = ''
+        for idx, icdar_pol in enumerate(list_icdar_ocr_poly):
+            line = str(idx+1)+','+ icdar_pol.to_icdar_line(map_type=None)
+            output_icdar_txt +=line +'\n'
+        output_icdar_txt = output_icdar_txt.rstrip('\n')
+        with open(os.path.join(output_dir, anno.replace('.txt', '.tsv')), mode='wt', encoding='utf-8') as f:
+            f.writelines(output_icdar_txt)
+
 if __name__ == '__main__':
     from mc_ocr.config import filtered_csv, cls_out_txt_dir, kie_out_txt_dir, \
         kie_out_viz_dir, rot_out_img_dir, json_data_path, kie_boxes_transcripts
+
     # parse_anno_from_csv_to_icdar_result(csv_file=filtered_csv,
     #                                     icdar_dir=cls_out_txt_dir,
     #                                     output_dir=kie_out_txt_dir,
@@ -243,11 +270,20 @@ if __name__ == '__main__':
     #                 save_viz_dir=kie_out_viz_dir,
     #                 extract_kie_type=True)
 
-    kie_train_dir = os.path.dirname(kie_out_txt_dir)
-    os.symlink(rot_out_img_dir, os.path.join(kie_train_dir,'images'))
+    # kie_train_dir = os.path.dirname(kie_out_txt_dir)
+    # os.symlink(rot_out_img_dir, os.path.join(kie_train_dir,'images'))
+    #
+    # create_data_pick_boxes_and_transcripts(icdar_dir=kie_out_txt_dir,
+    #                                        output_dir=kie_boxes_transcripts)
+    #
+    # create_data_pick_csv_train_val(kie_train_dir, train_ratio=0.92)
+    #
+    # combine_2_icdar_dir_to_creat_pick_boxes_and_transcripts()
 
-    create_data_pick_boxes_and_transcripts(icdar_dir=kie_out_txt_dir,
-                                           output_dir=kie_boxes_transcripts)
-
-    create_data_pick_csv_train_val(kie_train_dir, train_ratio=0.92)
+    icdar_ocr_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/icdar'
+    icdar_entity_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/icdar_entity'
+    output_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/boxes_and_transcripts'
+    combine_2_icdar_dir_to_creat_pick_boxes_and_transcripts(icdar_ocr_dir=icdar_ocr_dir,
+                                                            icdar_entity_dir=icdar_entity_dir,
+                                                            output_dir=output_dir)
 

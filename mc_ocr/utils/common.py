@@ -94,7 +94,7 @@ def get_list_icdar_poly(icdar_path, ignore_kie_type = False):
             if type_str in inv_type_map.keys():
                 type = inv_type_map[type_str]
 
-        coors = [int(f) for f in coordinates.split(',')]
+        coors = [int(float(f)) for f in coordinates.split(',')]
         pol = poly(coors, type=type, value=val)
         list_icdar_poly.append(pol)
     return list_icdar_poly
