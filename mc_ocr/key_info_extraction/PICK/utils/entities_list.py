@@ -2,14 +2,15 @@
 # @Author: Wenwen Yu
 # @Created Time: 7/8/2020 9:34 PM
 
-Entities_list = ['ben_bank_name',
-                 'ben_add',
-                 'ben_name',
-                 'importer_name',
+Entities_list = [
+                 'contract_no',
                  'exporter_name',
                  'exporter_add',
-                 'contract_no',
+                 'importer_name',
                  'payment_method',
+                 'ben_bank_name',
+                 'ben_add',
+                 'ben_name',
                  'ben_acc',
                  'swift_code'
                  ]

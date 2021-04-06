@@ -56,7 +56,7 @@
     "train_dataset": {
         "type": "PICKDataset",
         "args": {
-            "files_name": "/data_backup/cuongnd/sale_contract_viettel/SaleContract/train_list.csv",
+            "files_name": "/data_backup/cuongnd/sale_contract_viettel/SaleContract/upsampling/train_list.csv",
             "boxes_and_transcripts_folder": "boxes_and_transcripts",
             "images_folder": "images",
             "entities_folder": "entities",
@@ -71,7 +71,7 @@
     "validation_dataset": {
         "type": "PICKDataset",
         "args": {
-            "files_name": "/data_backup/cuongnd/sale_contract_viettel/SaleContract/val_list.csv",
+            "files_name": "/data_backup/cuongnd/sale_contract_viettel/SaleContract/upsampling/val_list.csv",
             "boxes_and_transcripts_folder": "boxes_and_transcripts",
             "images_folder": "images",
             "entities_folder": "entities",

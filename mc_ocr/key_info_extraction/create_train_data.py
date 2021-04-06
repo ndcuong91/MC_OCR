@@ -211,7 +211,7 @@ def create_data_pick_csv_train_val(train_dir, train_ratio=0.92):
 
     train_txt_list = []
     for idx, f in enumerate(list_train):
-        line = ','.join([str(idx + 1), 'receipts', f])
+        line = ','.join([str(idx + 1), 'salecontract', f])
         train_txt_list.append(line + '\n')
 
     with open(os.path.join(train_dir, 'train_list.csv'), mode='w', encoding='utf-8') as f:
@@ -219,7 +219,7 @@ def create_data_pick_csv_train_val(train_dir, train_ratio=0.92):
 
     val_txt_list = []
     for idx, f in enumerate(list_val):
-        line = ','.join([str(idx + 1), 'receipts', f])
+        line = ','.join([str(idx + 1), 'salecontract', f])
         val_txt_list.append(line + '\n')
 
     with open(os.path.join(train_dir, 'val_list.csv'), mode='w', encoding='utf-8') as f:
@@ -276,14 +276,14 @@ if __name__ == '__main__':
     # create_data_pick_boxes_and_transcripts(icdar_dir=kie_out_txt_dir,
     #                                        output_dir=kie_boxes_transcripts)
     #
-    # create_data_pick_csv_train_val(kie_train_dir, train_ratio=0.92)
+    create_data_pick_csv_train_val('/data_backup/cuongnd/sale_contract_viettel/SaleContract/upsampling', train_ratio=0.93)
     #
     # combine_2_icdar_dir_to_creat_pick_boxes_and_transcripts()
 
     icdar_ocr_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/icdar'
     icdar_entity_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/icdar_entity'
     output_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/boxes_and_transcripts'
-    combine_2_icdar_dir_to_creat_pick_boxes_and_transcripts(icdar_ocr_dir=icdar_ocr_dir,
-                                                            icdar_entity_dir=icdar_entity_dir,
-                                                            output_dir=output_dir)
+    # combine_2_icdar_dir_to_creat_pick_boxes_and_transcripts(icdar_ocr_dir=icdar_ocr_dir,
+    #                                                         icdar_entity_dir=icdar_entity_dir,
+    #                                                         output_dir=output_dir)
 

@@ -1,5 +1,3 @@
-import matplotlib
-matplotlib.rc('font', family='TakaoPGothic')
 from matplotlib import pyplot as plt
 
 import matplotlib.patches as patches
@@ -7,12 +5,33 @@ import cv2, os, csv
 from mc_ocr.utils.common import poly, get_list_file_in_folder, get_list_gt_poly, type_map
 from mc_ocr.submit.submit import get_list_error_imgs
 
-color_map = {1: 'r', 15: 'green', 16: 'blue', 17: 'm', 18: 'cyan'}
-txt_color_map = {1: 'b', 15: 'green', 16: 'blue', 17: 'm', 18: 'cyan'}
+color_map = {1: 'r',
+             2: 'green',
+             3: 'blue',
+             4: 'm',
+             5: 'cyan',
+             6: 'green',
+             7: 'blue',
+             8: 'm',
+             9: 'cyan',
+             10: 'blue',
+             11: 'r'
+             }
+txt_color_map = {1: 'b',
+                 2: 'green',
+                 3: 'blue',
+                 4: 'm',
+                 5: 'cyan',
+                 6: 'green',
+                 7: 'blue',
+                 8: 'm',
+                 9: 'cyan',
+                 10: 'blue',
+                 11: 'r'
+                 }
 inv_type_map = {v: k for k, v in type_map.items()}
 
-
-def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1], viz_img_size=[20,20], fontsize=20):
+def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1], viz_img_size=[20, 20], fontsize=20, show_type = True):
     '''
     visualize polygon
     :param img: numpy image read by opencv
@@ -21,16 +40,19 @@ def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1], viz_img_size=[2
     :return:
     '''
     fig, ax = plt.subplots(1)
-    fig.set_size_inches(viz_img_size[0],viz_img_size[1])
+    fig.set_size_inches(viz_img_size[0], viz_img_size[1])
     plt.imshow(img)
 
     for polygon in list_poly:
         ax.add_patch(
             patches.Polygon(polygon.list_pts, linewidth=2, edgecolor=color_map[polygon.type], facecolor='none'))
         draw_value = polygon.value
+        if show_type:
+            draw_value = draw_value +','+str(type_map[polygon.type])
         if polygon.type in ignor_type:
             draw_value = ''
-        plt.text(polygon.list_pts[0][0], polygon.list_pts[0][1], draw_value, fontsize=fontsize,
+        max_x = max(polygon.list_pts[0][0],polygon.list_pts[1][0],polygon.list_pts[2][0])
+        plt.text(max_x, polygon.list_pts[0][1], draw_value, fontsize=fontsize,
                  fontdict={"color": txt_color_map[polygon.type]})
     # plt.show()
 
@@ -39,7 +61,8 @@ def viz_poly(img, list_poly, save_viz_path=None, ignor_type=[1], viz_img_size=[2
         fig.savefig(save_viz_path, bbox_inches='tight')
 
 
-def viz_icdar(img_path, anno_path, save_viz_path=None, extract_kie_type=False, ignor_type=[1], viz_img_size=[20,20], fontsize=20):
+def viz_icdar(img_path, anno_path, save_viz_path=None, extract_kie_type=False, ignor_type=[1], viz_img_size=[20, 20],
+              fontsize=20):
     if not isinstance(img_path, str):
         image = img_path
     else:
@@ -63,18 +86,19 @@ def viz_icdar(img_path, anno_path, save_viz_path=None, extract_kie_type=False, i
         if extract_kie_type:
             last_comma_idx = val.rfind(',')
             type_str = val[last_comma_idx + 1:]
-            val = val[:last_comma_idx]
+            if last_comma_idx ==-1:
+                val = ''
             if type_str in inv_type_map.keys():
                 type = inv_type_map[type_str]
 
-        coors = [int(f) for f in coordinates.split(',')]
+        coors = [round(float(f)) for f in coordinates.split(',')]
         pol = poly(coors, type=type, value=val)
         list_poly.append(pol)
     viz_poly(img=image,
              list_poly=list_poly,
              save_viz_path=save_viz_path,
              ignor_type=ignor_type,
-             viz_img_size = viz_img_size,
+             viz_img_size=viz_img_size,
              fontsize=fontsize)
 
 
@@ -87,7 +111,7 @@ def viz_icdar_multi(img_dir, anno_dir, save_viz_dir, extract_kie_type=False, ign
         #     continue
         print(idx, file)
         img_path = os.path.join(img_dir, file)
-        anno_path = os.path.join(anno_dir, file.replace('.jpg', '.txt'))
+        anno_path = os.path.join(anno_dir, file.replace('.jpg', '.txt').replace('.png', '.txt'))
         save_img_path = os.path.join(save_viz_dir, file)
         viz_icdar(img_path, anno_path, save_img_path, extract_kie_type, ignor_type)
 
@@ -171,7 +195,7 @@ def viz_output_of_pick(img_dir, output_txt_dir, output_viz_dir):
         list_poly = []
         for line in output_txt:
             coordinates, type, text = line.replace('\n', '').split('\t')
-            find_poly = poly(coordinates, type=1, value=text)
+            find_poly = poly(coordinates, type=inv_type_map[type], value=text)
             list_poly.append(find_poly)
 
         img_name = file.replace('.txt', '.png')
@@ -227,12 +251,12 @@ if __name__ == '__main__':
     #           anno_path=anno_path,
     #           save_viz_path=save_vix_path)
 
-    # viz_icdar_multi(
-    #     '/data20.04/data/data_Korea/WER_20210122/jpg',
-    #     '/data20.04/data/data_Korea/WER_20210122/anno_icdar',
-    #     '/data20.04/data/data_Korea/WER_20210122/viz_anno',
-    #     ignor_type=[],
-    #     extract_kie_type=False)
+    viz_icdar_multi(
+        '/data_backup/cuongnd/sale_contract_viettel/SaleContract/images',
+        '/data_backup/cuongnd/sale_contract_viettel/SaleContract/icdar_entity',
+        '/data_backup/cuongnd/sale_contract_viettel/SaleContract/viz_entity',
+        ignor_type=[1],
+        extract_kie_type=True)
 
     # src_dir = '/home/vvn/PycharmProjects/MC_OCR/mc_ocr/data/baocaotaichinh'
     # compare_dir = '/data_backup/cuongnd/mc_ocr/output_result/rotation_corrector/baocaotaichinh/viz_imgs'
@@ -250,13 +274,13 @@ if __name__ == '__main__':
     #           viz_dir=viz_dir,
     #           img_dir=img_dir)
 
-    img_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/images'
-    output_txt_dir = '/data_backup/cuongnd/mc_ocr/output_result/key_info_extraction/SaleContract/txt'
-    output_viz_dir =  '/data_backup/cuongnd/mc_ocr/output_result/key_info_extraction/SaleContract/viz_imgs'
-
-    viz_output_of_pick(img_dir=img_dir,
-                       output_txt_dir=output_txt_dir,
-                       output_viz_dir=output_viz_dir)
+    # img_dir = '/data_backup/cuongnd/sale_contract_viettel/SaleContract/images'
+    # output_txt_dir = '/data_backup/cuongnd/mc_ocr/output_result/key_info_extraction/SaleContract/txt'
+    # output_viz_dir = '/data_backup/cuongnd/mc_ocr/output_result/key_info_extraction/SaleContract/viz_imgs'
+    #
+    # viz_output_of_pick(img_dir=img_dir,
+    #                    output_txt_dir=output_txt_dir,
+    #                    output_viz_dir=output_viz_dir)
 
     # csv_file = '/data20.04/data/MC_OCR/output_results/EDA/mcocr_train_df_filtered_rotate_new.csv'
     # img_dir = '/data20.04/data/MC_OCR/output_results/box_rectify/train_pred_lines_filtered/imgs'

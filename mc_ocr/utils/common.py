@@ -2,8 +2,26 @@ import math, os, cv2
 import numpy as np
 import Levenshtein, ast
 
-type_map = {1: 'OTHER', 15: 'SELLER', 16: 'ADDRESS', 17: 'TIMESTAMP', 18: 'TOTAL_COST'}
-color_map = {15: (0, 255, 0), 16: (255, 0, 0), 17: (0, 0, 255), 18: (0, 255, 255)}
+type_map = {1: 'other',
+            2: 'contract_no',
+            3: 'exporter_name',
+            4: 'exporter_add',
+            5: 'importer_name',
+            6: 'payment_method',
+            7: 'ben_bank_name',
+            8: 'ben_add',
+            9: 'ben_name',
+            10: 'ben_acc',
+            11: 'swift_code'}
+color_map = {2: (0, 255, 0),
+             3: (255, 0, 0),
+             4: (0, 0, 255),
+             5: (0, 255, 255),
+             6: (120, 0, 0),
+             7: (0, 120, 0),
+             8: (120, 120, 0),
+             9: (120, 0, 120),
+             10: (0, 120, 255)}
 inv_type_map = {v: k for k, v in type_map.items()}
 
 def get_list_file_in_folder(dir, ext=['jpg', 'png', 'JPG', 'PNG']):
@@ -11,6 +29,7 @@ def get_list_file_in_folder(dir, ext=['jpg', 'png', 'JPG', 'PNG']):
     file_names = [fn for fn in os.listdir(dir)
                   if any(fn.endswith(ext) for ext in included_extensions)]
     return file_names
+
 
 def get_list_file_in_dir_and_subdirs(folder, ext=['jpg', 'png', 'JPG', 'PNG']):
     file_names = []
@@ -22,11 +41,14 @@ def get_list_file_in_dir_and_subdirs(folder, ext=['jpg', 'png', 'JPG', 'PNG']):
                 # print(os.path.join(path, name).replace(folder,'')[1:])
     return file_names
 
+
 def euclidean_distance(pt1, pt2):
     return math.sqrt((pt1[0] - pt2[0]) * (pt1[0] - pt2[0]) + (pt1[1] - pt2[1]) * (pt1[1] - pt2[1]))
 
+
 def get_first(e):
     return e[0]
+
 
 def get_list_gt_poly(row, add_key_to_value=False):
     '''
@@ -56,7 +78,7 @@ def get_list_gt_poly(row, add_key_to_value=False):
             else:
                 final_value = value[idx]
                 if add_key_to_value and box['category_id'] in index.keys():
-                    final_value += ','+type_map[box['category_id']] + '_' + str(index[box['category_id']])
+                    final_value += ',' + type_map[box['category_id']] + '_' + str(index[box['category_id']])
                 pol = poly(coor, type=box['category_id'], value=final_value)
                 list_gt_poly.append(pol)
                 total_box += 1
@@ -66,7 +88,7 @@ def get_list_gt_poly(row, add_key_to_value=False):
     return list_gt_poly
 
 
-def get_list_icdar_poly(icdar_path, ignore_kie_type = False):
+def get_list_icdar_poly(icdar_path, ignore_kie_type=False):
     '''
 
     :param icdar_path: path of icdar txt file
@@ -86,7 +108,7 @@ def get_list_icdar_poly(icdar_path, ignore_kie_type = False):
 
         coordinates = anno[:idx]
         val = anno[idx + 1:]
-        type=1
+        type = 1
         if ignore_kie_type:
             last_comma_idx = val.rfind(',')
             type_str = val[last_comma_idx + 1:]
@@ -234,15 +256,16 @@ def IoU(poly1, poly2, debug=False):
     return iou_score
 
 
-def filter_data(src_dir, dst_dir, dst_anno=None):  #filter data in dst_dir by src_dir
+def filter_data(src_dir, dst_dir, dst_anno=None):  # filter data in dst_dir by src_dir
     list_files = get_list_file_in_folder(src_dir)
-    list_files2=get_list_file_in_folder(dst_dir)
+    list_files2 = get_list_file_in_folder(dst_dir)
     for idx, f in enumerate(list_files2):
         if f in list_files:
             continue
         else:
-            print(idx,'filter file',f)
-            os.remove(os.path.join(dst_dir,f))
+            print(idx, 'filter file', f)
+            os.remove(os.path.join(dst_dir, f))
+
 
 if __name__ == '__main__':
     first_pol = poly('100,221,299,221,299,329,100,329')
@@ -258,4 +281,4 @@ if __name__ == '__main__':
     #             dst_dir = dst_dir,
     #             dst_anno=dst_anno)
 
-    print(cer_loss_one_image('abc','Chợ Sủi Phú Thị Gia Lâm'))
+    print(cer_loss_one_image('abc', 'Chợ Sủi Phú Thị Gia Lâm'))
