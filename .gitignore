@@ -11,3 +11,9 @@ mc_ocr/data/mc_ocr_private_test
 mc_ocr/data/mc_ocr_train
 mc_ocr/data/viReceipts
 mc_ocr/data/wer_20210125
+mc_ocr/data/baocaotaichinh
+mc_ocr/data/SaleContract
+mc_ocr/key_info_extraction/PICK/weights/model_best.pth
+mc_ocr/key_info_extraction/PICK/weights/receipts.pth
+mc_ocr/key_info_extraction/PICK/weights/invoices_model/ckp/config.json
+mc_ocr/key_info_extraction/PICK/weights/invoices_model/ckp/model_best.pth

@@ -24,7 +24,7 @@ def init_models(gpu='0'):
         os.environ['CUDA_VISIBLE_DEVICES'] = gpu
     else:
         print('Use CPU')
-    classifier = Classifier_Vietocr()
+    classifier = Classifier_Vietocr(gpu = gpu)
     return classifier
 
 

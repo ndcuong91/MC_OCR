@@ -18,6 +18,8 @@ class Classifier_Vietocr:
         self.config['cnn']['pretrained'] = False
         if gpu is not None:
             self.config['device'] = 'cuda:' + str(gpu)
+        else:
+            self.config['device'] = 'cpu'
         self.config['predictor']['beamsearch'] = False
         self.model = Predictor(self.config)
 
