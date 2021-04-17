@@ -199,13 +199,17 @@ if __name__ == "__main__":
     from mc_ocr.config import det_model_dir, raw_img_dir, det_visualize, \
         det_out_viz_dir, det_out_txt_dir, det_db_thresh, det_db_box_thresh
 
-    args.image_dir = raw_img_dir
+    args.image_dir = '/home/duycuong/PycharmProjects/vvn/demo_read_document/demo_app/uploads/30 - HANWHA (co tu khoa)'
     args.det_model_dir = det_model_dir
     args.det_db_thresh = det_db_thresh
     args.det_db_box_thresh = det_db_box_thresh
     args.use_gpu = False
     args.det_db_thresh = 0.2
     args.det_limit_side_len = 1600
+    det_visualize=True
+    det_out_viz_dir='/home/duycuong/PycharmProjects/vvn/demo_read_document/demo_app/uploads/30 - HANWHA (co tu khoa)/output'
+    det_out_txt_dir='/home/duycuong/PycharmProjects/vvn/demo_read_document/demo_app/uploads/30 - HANWHA (co tu khoa)/output'
+
 
     # args.det_max_side_len = 1600
     # args.det_algorithm = 'DB'
