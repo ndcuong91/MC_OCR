@@ -1,7 +1,8 @@
-# MC_OCR - TOP 2 solution cho bài toán trích xuất thông tin hóa đơn
+# MC_OCR 2021 - TOP solution cho bài toán trích xuất thông tin hóa đơn
+*Update 23 Apr 2021* : Bài báo của team mình "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" đã được accept tại hội thảo RIVF2021!
 *Update 30 Mar 2021* : Nếu các bạn không chạy được source code, hãy tạo issues và mình sẽ sửa trong thời gian sớm nhất.
 ## Giới thiệu
-Cuộc thi MC_OCR bao gồm 2 tasks là (1) Đánh giá chất lượng hóa đơn và (2) trích xuất thông tin quan trọng từ ảnh chụp hóa đơn bán lẻ ở Việt Nam. Chi tiết hơn các bạn có thể xem tại
+Cuộc thi MC_OCR 2021 bao gồm 2 tasks là (1) Đánh giá chất lượng hóa đơn và (2) trích xuất thông tin quan trọng từ ảnh chụp hóa đơn bán lẻ ở Việt Nam. Chi tiết hơn các bạn có thể xem tại
 trang chủ cuộc thi: https://rivf2021-mc-ocr.vietnlp.com/ . Dưới đây là một vài ảnh mẫu 
 
 ![samples](https://github.com/ndcuong91/MC_OCR/blob/master/mc_ocr_samples.JPG)
@@ -142,7 +143,7 @@ Team mình chỉ sử dụng xử lý ảnh cơ bản cho phần này
 #### 4. text classifier
 Đây chính là bước OCR đọc chữ từ vùng ảnh đã được xoay từ trên. 
 Team mình sử dụng pre-trained từ open soucre nổi tiếng [Vietocr](https://github.com/pbcquoc/vietocr). 
-Rất cảm ơn anh pbcquoc đã public một model rất tốt ra cộng đồng.
+Rất cảm ơn bạn pbcquoc đã public một model rất tốt ra cộng đồng.
 Các bạn hãy download pretrained của mô hình vgg19_seq2seq tại [đây](https://drive.google.com/uc?id=1nTKlEog9YFK74kPyX0qLwCWi60_YHHk4) và chỉnh sửa đường dẫn trong file *config.py*
 ```buildoutcfg
 cls_model_path = [your downloaded model]
@@ -254,15 +255,14 @@ Dưới đây là 1 vài kết quả sau khi visualize:
 ![sample_res](https://github.com/ndcuong91/MC_OCR/blob/master/sample_res.png)
 
 ## TỔNG KẾT 
-#### Kết quả trên tập private test
+#### Kết quả trên tập private test của cuộc thi 
 | **Task** |  **Score** |  **Top** | **Speed** |
 | ------- | --------- | -------- | --------- |
 | 1. Quality evaluation  | RMSE: 0.12   | 3     | 2ms (GPU) |
-| 2. Key information extraction  | CER: 0.23   | 2     | < 1s (GPU) |
+| 2. Key information extraction  | CER: 0.23   | 2     |  1.5s |
 
 GPU team mình sử dụng là Nvidia RTX 2080 Ti
 
-Trang kết quả (team mình là SDSV_AICR): https://competitions.codalab.org/competitions/27798#results
 #### Open source đã sử dụng:
 - PaddleOCR: https://github.com/PaddlePaddle/PaddleOCR
 - PICK-Pytorch: https://github.com/wenwenyu/PICK-pytorch
