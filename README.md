@@ -1,4 +1,6 @@
 # MC_OCR 2021 - TOP solution cho bài toán trích xuất thông tin hóa đơn
+*Update 23 Nov 2021* : Mình sẽ có phần thuyết trình (oral session) cho bài báo "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" tại hội thảo RIVF2021 vào lúc 17:10 - 17:30 ngày 02/12/2021
+
 *Update 23 Apr 2021* : Bài báo của team mình "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" đã được accept tại hội thảo RIVF2021!
 
 *Update 30 Mar 2021* : Nếu các bạn không chạy được source code, hãy tạo issues và mình sẽ sửa trong thời gian sớm nhất.
