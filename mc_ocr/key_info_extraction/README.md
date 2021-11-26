@@ -42,37 +42,3 @@ Document: max 100 lines, max characeters in 1 line is 100 character
 
 ## Result Key extraction sample
 
-| **Key**            |  **Value** |
-|-------------------- |---------|
-|form|Mẫu số (Form no):|
-|form_val|07KPTQ0/001|
-|serial_val|CD/19E|
-|serial|Ký hiệu (Sign):|
-|no|Số (No):|
-|no_val|0000141|
-|date|Ngày (Date) 15 tháng (month) 3 năm (year)  2020|
-|company_name|Đơn vị bán hàng (Supplier):|
-|company_name_val|CÔNG TY TNHH CDL PRECISION TECHNOLOGY (VIETNAM)|
-|tax_code|Mã số thuế (Tax code):|
-|tax_code_val|2500546489|
-|address_val|Lô 14, Khu công nghiệp Bình Xuyên, Xã Sơn Lôi, Huyện Bình Xuyên, Tỉnh Vĩnh\|
-|address|Địa chỉ (Address):|
-|address_val|Phúc , Việt Nam|
-|buyer|Họ tên người mua hàng (Buyer):|
-|company_name|Tên đơn vị (Company's name):|
-|company_name_val|Công ty TNHH Samsung Display Việt Nam|
-|tax_code_val|2300852009|
-|tax_code|Mã số thuế (Tax code):|
-|address_val|Khu Công Nghiệp Yên Phong, Xã Yên Trung, Huyện Yên Phong, Tỉnh Bắc Ninh, Việt|
-|address|Địa chỉ (Address):|
-|address_val|Nam|
-|account_no|Số tài khoản (Bank account)| 
-|total_val|144,0000|
-|total|Cộng tiền bán hàng hóa, dịch vụ (Total amount):|
-|amount_in_words|Số tiền viết bằng chữ (Total amount in words): |
-|amount_in_words_val|Một trăm bốn mươi bốn đô la Mỹ chẵn.|
-|exchange_rate_val|23.105 VND/USD|
-|exchange_rate|Tỷ giá (Exchange rate):|
-|date|Ngày chuyển đổi (conversion date): 15/03/2020|
-
-
