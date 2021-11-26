@@ -250,11 +250,11 @@ def measure(image=None, blurThreshold=150, spotThreshold=80, darkThreshold=.47, 
 
 
 def test_form3():
-    img_path = '/data20.04/data/SEVT/SEVT_form3_1120_1/20201120_104840.jpg'
+    img_path = '/data20.04/data/form3_1120_1/20201120_104840.jpg'
     img_path = ''
     if img_path == '':
         img_paths = get_img_paths(
-            '/data20.04/data/SEVT/SEVT_form3_1125_errors',
+            '/data20.04/data/form3_1125_errors',
             dropRoot=False)
     else:
         img_paths = [img_path]
