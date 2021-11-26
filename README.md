@@ -280,6 +280,6 @@ Tuy nhiên, khá nhiều hóa đơn là từ MINIMART ANAN và VinCommerce nên 
 - Yêu cầu không sử dụng dữ liệu ngoài với không gán nhãn thủ công khiến cho kết quả đạt được không quá tốt.
 
 ## TEAM MEMBER
-- cuongnd (nd.cuong1@samsung.com / nguyenduycuong2004@gmail.com)
-- anhnt (nt.anh6@samsung.com)
-- chungnx (nx.chung@samsung.com)
+- cuongnd (nguyenduycuong2004@gmail.com)
+- anhnt
+- chungnx
