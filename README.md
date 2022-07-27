@@ -1,14 +1,13 @@
-# MC_OCR 2021 - TOP 1 solution cho bài toán trích xuất thông tin hóa đơn
+# MC_OCR 2021 - TOP 1 solution cho bài toán kiểm tra chất lượng và trích xuất thông tin hóa đơn
 
 *Update 13 Dec 2021* : Cuộc thi chính thức đã kết thúc tuy nhiên các bạn vẫn có thể tải dataset và thử nghiệm các giải pháp cho cuộc thi tại https://aihub.vn/competitions/1.
 
-*Update 02 Dec 2021* : Team mình đã đạt top 1 cuộc thi MC-OCR 2021!
+*Update 02 Dec 2021* : Team mình (SDSV-AICR) đã đạt top 1 cuộc thi MC-OCR 2021!
 
 *Update 23 Nov 2021* : Mình sẽ thuyết trình cho bài báo "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" tại hội thảo RIVF2021 vào lúc 17:10 - 17:30 ngày 02/12/2021. [Link](https://www.youtube.com/watch?v=vSnh5elpoRY)
 
-*Update 23 Apr 2021* : Bài báo của team mình "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" đã được accept tại hội thảo RIVF2021!
+*Update 23 Apr 2021* : Bài báo của team mình (SDSV-AICR) "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" đã được accept tại hội thảo RIVF2021!
 
-*Update 30 Mar 2021* : Nếu các bạn không chạy được source code, hãy tạo issues và mình sẽ sửa trong thời gian sớm nhất.
 ## Giới thiệu
 Cuộc thi MC_OCR 2021 bao gồm 2 tasks là (1) Đánh giá chất lượng hóa đơn và (2) trích xuất thông tin quan trọng từ ảnh chụp hóa đơn bán lẻ ở Việt Nam. Chi tiết hơn các bạn có thể xem tại
 trang chủ cuộc thi: https://www.rivf2021-mc-ocr.vietnlp.com/ . Dưới đây là một vài ảnh mẫu
