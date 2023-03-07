@@ -6,7 +6,7 @@
 
 *Update 23 Nov 2021* : Mình sẽ thuyết trình cho bài báo "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" tại hội thảo RIVF2021 vào lúc 17:10 - 17:30 ngày 02/12/2021. [Link](https://www.youtube.com/watch?v=vSnh5elpoRY)
 
-*Update 23 Apr 2021* : Bài báo của team mình (SDSV-AICR) "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" đã được accept tại hội thảo RIVF2021!
+*Update 23 Apr 2021* : Paper của team mình (SDSV-AICR) "MC-OCR Challenge 2021: End-to-end system to extract key information from Vietnamese Receipts" đã được accept tại hội thảo RIVF2021! [Link]([https://www.youtube.com/watch?v=vSnh5elpoRY](https://ieeexplore.ieee.org/document/9642083))
 
 ## Giới thiệu
 Cuộc thi MC_OCR 2021 bao gồm 2 tasks là (1) Đánh giá chất lượng hóa đơn và (2) trích xuất thông tin quan trọng từ ảnh chụp hóa đơn bán lẻ ở Việt Nam. Chi tiết hơn các bạn có thể xem tại
