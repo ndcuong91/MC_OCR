@@ -54,7 +54,7 @@ def submit_from_kie(sample_submission_file, output_kie_dir, json_data_path, outp
         list_score = get_list_score_from_best_task1_submission(best_task1_csv)
     result_txt = 'img_id,anno_image_quality,anno_texts\n'
     dictionary = None
-    with open(json_data_path) as json_file:
+    with open(json_data_path, encoding="utf-8") as json_file:
         dictionary = json.load(json_file)
     for idx, file in enumerate(list_files):
         file = file.replace('.jpg', '.txt')
